@@ -3,11 +3,13 @@ package cat.institutmarianao.sailing.ws.model;
 import java.io.Serializable;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+@Entity
 /* Swagger */
 @Schema(oneOf = { Client.class, Admin.class }, discriminatorProperty = "role")
 /* Lombok */
@@ -37,9 +39,9 @@ public abstract class User implements Serializable {
 	protected String password;
 
 	protected Role role;
-	
-	public abstract String getInfo(); 
-	
+
+	public abstract String getInfo();
+
 	public boolean isAdmin() {
 		return false;
 	}
