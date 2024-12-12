@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import lombok.NonNull;
 import lombok.experimental.SuperBuilder;
 
 /* Swagger */
-@Schema(oneOf = { Booking.class, Rescheduling.class, Cancellation.class, Done.class}, discriminatorProperty = "type")
+@Schema(oneOf = { Booking.class, Rescheduling.class, Cancellation.class, Done.class }, discriminatorProperty = "type")
 /* Lombok */
 @Data
 @NoArgsConstructor
@@ -43,10 +44,11 @@ public abstract class Action implements Serializable {
 
 	protected Date date = new Date();
 
+	@ManyToOne
 	protected Trip trip;
 
 	protected Long idTrip;
-	
+
 	public String getInfo() {
 		return "";
 	}
