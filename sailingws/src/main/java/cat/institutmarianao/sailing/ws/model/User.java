@@ -9,7 +9,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@Entity
 /* Swagger */
 @Schema(oneOf = { Client.class, Admin.class }, discriminatorProperty = "role")
 /* Lombok */
@@ -17,6 +16,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+
+@Entity
 public abstract class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 

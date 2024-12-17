@@ -2,6 +2,7 @@ package cat.institutmarianao.sailing.ws.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
+
+@Entity
 public class Client extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -22,10 +25,10 @@ public class Client extends User implements Serializable {
 	protected String fullName;
 
 	protected Integer phone;
-	
+
 	@Override
 	public String getInfo() {
-		return this.fullName+" ("+this.phone+")";
+		return this.fullName + " (" + this.phone + ")";
 	}
-	
+
 }

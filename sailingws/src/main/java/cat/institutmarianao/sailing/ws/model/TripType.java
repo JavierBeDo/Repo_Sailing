@@ -2,6 +2,7 @@ package cat.institutmarianao.sailing.ws.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+
+@Entity
 public class TripType implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -35,8 +38,8 @@ public class TripType implements Serializable {
 
 	private double price;
 
-	private String departures;	// Comma-separated values: 9:30;11:30;13:30
- 
+	private String departures; // Comma-separated values: 9:30;11:30;13:30
+
 	private int duration;
 
 	private int maxPlaces;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.annotations.Formula;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToMany;
@@ -21,6 +22,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+
+@Entity
 public class Trip implements Serializable {
 
 	private static final long serialVersionUID = 1L;
