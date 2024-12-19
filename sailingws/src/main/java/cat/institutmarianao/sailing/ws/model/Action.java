@@ -3,9 +3,19 @@ package cat.institutmarianao.sailing.ws.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.data.annotation.Id;
+
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -21,6 +31,9 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 
 @Entity
+@Table(name = "actions")
+@DiscriminatorValue(value = "Type")
+@DiscriminatorColumn(name = "type")
 public abstract class Action implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -37,12 +50,16 @@ public abstract class Action implements Serializable {
 
 	/* Lombok */
 	@EqualsAndHashCode.Include
+	@Id
+	@GeneratedValue
 	protected Long id;
 
 	/* Lombok */
 	@NonNull
+	@Enumerated(EnumType.STRING)
 	protected Type type;
 
+	@OneToMany
 	protected User performer;
 
 	protected Date date = new Date();
@@ -50,6 +67,7 @@ public abstract class Action implements Serializable {
 	@ManyToOne
 	protected Trip trip;
 
+	@JoinColumn
 	protected Long idTrip;
 
 	public String getInfo() {

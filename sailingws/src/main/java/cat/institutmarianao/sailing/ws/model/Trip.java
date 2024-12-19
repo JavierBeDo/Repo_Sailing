@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.annotations.Formula;
+import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -41,6 +42,7 @@ public class Trip implements Serializable {
 
 	/* Lombok */
 	@EqualsAndHashCode.Include
+	@Id
 	private Long id;
 
 	private Client client;
