@@ -2,16 +2,16 @@ package cat.institutmarianao.sailing.ws.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-import org.springframework.data.annotation.Id;
-
+import jakarta.persistence.Id;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -33,7 +33,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "actions")
 @DiscriminatorValue(value = "Type")
-@DiscriminatorColumn(name = "type")
+//@DiscriminatorColumn(name = "type")
 public abstract class Action implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -43,6 +43,10 @@ public abstract class Action implements Serializable {
 	public static final String RESCHEDULING = "RESCHEDULING";
 	public static final String CANCELLATION = "CANCELLATION";
 	public static final String DONE = "DONE";
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected Long id;
+
 
 	public enum Type {
 		BOOKING, RESCHEDULING, CANCELLATION, DONE
@@ -50,17 +54,14 @@ public abstract class Action implements Serializable {
 
 	/* Lombok */
 	@EqualsAndHashCode.Include
-	@Id
-	@GeneratedValue
-	protected Long id;
-
+	
 	/* Lombok */
 	@NonNull
 	@Enumerated(EnumType.STRING)
 	protected Type type;
 
-	@OneToMany
-	protected User performer;
+	@OneToMany(mappedBy = "username")
+	protected List<User> performer;
 
 	protected Date date = new Date();
 

@@ -2,10 +2,9 @@ package cat.institutmarianao.sailing.ws.model;
 
 import java.io.Serializable;
 
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Id;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -25,9 +24,9 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @DiscriminatorValue(value = "Role")
-@DiscriminatorColumn(name = "role")
+//@DiscriminatorColumn(name = "role")
 public abstract class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -2,10 +2,17 @@ package cat.institutmarianao.sailing.ws.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 /* Lombok */
 @Data
@@ -13,6 +20,9 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 
 @Entity
+@Table(name = "trip_types")
+@DiscriminatorValue(value = "Category")
+//@DiscriminatorColumn(name = "category")
 public class TripType implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -28,19 +38,24 @@ public class TripType implements Serializable {
 
 	/* Lombok */
 	@EqualsAndHashCode.Include
+	
+	@Id
 	private Long id;
 
-	private String title;
-
+	@Enumerated(EnumType.STRING)
 	private Category category;
 
+	@ManyToOne
+    @JoinColumn(name = "departures")
+	private Departure departures; // Comma-separated values: 9:30;11:30;13:30
+	
 	private String description;
-
-	private double price;
-
-	private String departures; // Comma-separated values: 9:30;11:30;13:30
 
 	private int duration;
 
 	private int maxPlaces;
+	
+	private double price;
+	
+	private String title;
 }
