@@ -6,13 +6,12 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 /* Lombok */
 @Data
@@ -38,24 +37,26 @@ public class TripType implements Serializable {
 
 	/* Lombok */
 	@EqualsAndHashCode.Include
-	
+
 	@Id
 	private Long id;
 
 	@Enumerated(EnumType.STRING)
 	private Category category;
 
-	@ManyToOne
-    @JoinColumn(name = "departures")
+	// @ManyToOne
+	// @JoinColumn(name = "departures", nullable = false)
 	private Departure departures; // Comma-separated values: 9:30;11:30;13:30
-	
+
 	private String description;
 
 	private int duration;
 
+	@Positive
 	private int maxPlaces;
-	
+
+	@Positive
 	private double price;
-	
+
 	private String title;
 }

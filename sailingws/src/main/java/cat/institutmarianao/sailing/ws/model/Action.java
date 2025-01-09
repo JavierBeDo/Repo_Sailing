@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.persistence.Id;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -12,6 +11,9 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -33,6 +35,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "actions")
 @DiscriminatorValue(value = "Type")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //@DiscriminatorColumn(name = "type")
 public abstract class Action implements Serializable {
 
@@ -47,14 +50,13 @@ public abstract class Action implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 
-
 	public enum Type {
 		BOOKING, RESCHEDULING, CANCELLATION, DONE
 	}
 
 	/* Lombok */
 	@EqualsAndHashCode.Include
-	
+
 	/* Lombok */
 	@NonNull
 	@Enumerated(EnumType.STRING)

@@ -9,7 +9,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -17,6 +16,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+
 /* Lombok */
 @Data
 @NoArgsConstructor
@@ -33,12 +33,12 @@ public class Departure implements Serializable {
 
 	/* Lombok */
 	@EqualsAndHashCode.Include
-	
+
 	@Id
 	protected Long id;
 
-    @ManyToOne
-	@JoinColumn(name = "trip_type_id")
+	@ManyToOne
+	@JoinColumn(name = "trip_type_id", nullable = false, referencedColumnName = "id")
 	private TripType tripType;
 
 	private Date date;

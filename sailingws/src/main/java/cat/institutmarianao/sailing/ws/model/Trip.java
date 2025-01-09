@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.annotations.Formula;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Column;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
@@ -27,7 +27,7 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 
 @Entity
-@Table (name = "trips")
+@Table(name = "trips")
 public class Trip implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -48,14 +48,12 @@ public class Trip implements Serializable {
 	@Id
 	private Long id;
 
-	@JoinColumn
-	@Column(name = "client_username")
+	@JoinColumn(name = "client_username", nullable = false, referencedColumnName = "username")
 	private Client client;
 
 	private int places;
-	
-	@JoinColumn
-	@Column(name = "departure_id")
+
+	@JoinColumn(name = "departure_id", nullable = false, referencedColumnName = "id")
 	private Departure departure;
 
 	/* Lombok */
