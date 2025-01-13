@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "trip_types")
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue(value = "Category")
 //@DiscriminatorColumn(name = "category")
 public class TripType implements Serializable {

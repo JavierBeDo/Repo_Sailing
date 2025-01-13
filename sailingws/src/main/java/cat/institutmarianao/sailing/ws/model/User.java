@@ -2,7 +2,11 @@ package cat.institutmarianao.sailing.ws.model;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -28,7 +32,8 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //@DiscriminatorValue(value = "Role")
-//@DiscriminatorColumn(name = "role")
+@DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
+
 public abstract class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -56,8 +61,10 @@ public abstract class User implements Serializable {
 	@Enumerated(EnumType.STRING)
 	protected Role role;
 
+	@JsonIgnore
 	public abstract String getInfo();
 
+	@JsonIgnore
 	public boolean isAdmin() {
 		return false;
 	}

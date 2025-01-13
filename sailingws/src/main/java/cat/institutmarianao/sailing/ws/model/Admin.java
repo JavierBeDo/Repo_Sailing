@@ -2,6 +2,7 @@ package cat.institutmarianao.sailing.ws.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,6 +16,7 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 
 @Entity
+@DiscriminatorValue(User.ADMIN)
 public class Admin extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
