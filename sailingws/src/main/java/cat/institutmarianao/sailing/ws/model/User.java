@@ -3,8 +3,11 @@ package cat.institutmarianao.sailing.ws.model;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Entity;
@@ -34,6 +37,11 @@ import lombok.experimental.SuperBuilder;
 //@DiscriminatorValue(value = "Role")
 @DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "role")
+
+@JsonSubTypes({ @JsonSubTypes.Type(value = Client.class, name = "CLIENT"),
+		@JsonSubTypes.Type(value = Admin.class, name = "ADMIN") })
+
 public abstract class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -59,6 +67,7 @@ public abstract class User implements Serializable {
 	protected String password;
 
 	@Enumerated(EnumType.STRING)
+	@Column(insertable = false, updatable = false)
 	protected Role role;
 
 	@JsonIgnore
