@@ -5,11 +5,14 @@ import java.util.Date;
 
 import org.hibernate.annotations.Formula;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -41,9 +44,13 @@ public class Departure implements Serializable {
 	@JoinColumn(name = "trip_type_id", nullable = false, referencedColumnName = "id")
 	private TripType tripType;
 
-	private Date date;
+	@Column(name = "date", columnDefinition = "DATE")
+	@Temporal(TemporalType.DATE)
+	protected Date date;
 
-	private Date departure;
+	@Column(name = "departure", columnDefinition = "TIME")
+	@Temporal(TemporalType.TIME)
+	protected Date departure;
 
 	/* Hibernate */
 	@Formula("(SELECT COALESCE(SUM(t.places), 0) " + "FROM trips t INNER JOIN actions a ON a.trip_id = t.id "

@@ -2,6 +2,7 @@ package cat.institutmarianao.sailing.ws.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -45,9 +46,8 @@ public class TripType implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Category category;
 
-	// @ManyToOne
-	// @JoinColumn(name = "departures", nullable = false)
-	private Departure departures; // Comma-separated values: 9:30;11:30;13:30
+	@Column(name = "departures", length = 255)
+	private String departures; // Comma-separated values: 9:30;11:30;13:30
 
 	private String description;
 

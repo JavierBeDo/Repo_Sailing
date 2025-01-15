@@ -20,6 +20,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -76,11 +77,23 @@ public abstract class Action implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	protected Date date = new Date();
 
-	@Column(name = "new_date", columnDefinition = "TIMESTAMP")
-	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "new_date", columnDefinition = "DATE")
+	@Temporal(TemporalType.DATE)
 	protected Date newDate = new Date();
 
-//	@ManyToOne
+	@Column(name = "new_departure", columnDefinition = "TIME")
+	@Temporal(TemporalType.TIME)
+	protected Date newDeparture = new Date();
+
+	@Column(name = "old_date", columnDefinition = "DATE")
+	@Temporal(TemporalType.DATE)
+	protected Date oldDate = new Date();
+
+	@Column(name = "old_departure", columnDefinition = "TIME")
+	@Temporal(TemporalType.TIME)
+	protected Date oldDeparture = new Date();
+
+	@ManyToOne
 	@JoinColumn(name = "trip_id", nullable = false, referencedColumnName = "id")
 	protected Trip trip;
 
