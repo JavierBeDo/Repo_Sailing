@@ -9,10 +9,11 @@ import org.springframework.lang.Nullable;
 import cat.institutmarianao.sailing.ws.model.Departure;
 
 public interface DepartureRepository extends JpaRepository<Departure, Long> {
-	
+
+	// Buscar una salida por tripTypeId, fecha y hora de salida
 	@Nullable
-	Departure findOneBytripTypeIdAndDateAndDeparture(Long tripTypeId, Date date, Date departure);
-	
-	List<Departure> findAllBytripTypeIdAndDate(Long tripTypeId, Date date);
-	
+	Departure findOneByTripTypeIdAndDateAndDeparture(Long tripTypeId, Date date, Date departure);
+
+	// Obtener todas las salidas para un tipo de viaje y fecha específica
+	List<Departure> findAllByTripTypeIdAndDate(Long tripTypeId, Date date);
 }

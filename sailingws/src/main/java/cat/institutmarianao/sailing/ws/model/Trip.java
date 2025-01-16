@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.hibernate.annotations.Formula;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -48,17 +52,20 @@ public class Trip implements Serializable {
 	@Id
 	private Long id;
 
-	@JoinColumn(name = "client_username", nullable = false, referencedColumnName = "username")
-	private Client client;
+	// Cambiar este campo para que sea solo el username
+	@Column(name = "client_username", length = 255, nullable = false)
+	private String client;
 
 	private int places;
 
+	@Column(name = "departure_id", length = 20)
 	@JoinColumn(name = "departure_id", nullable = false, referencedColumnName = "id")
-	private Departure departure;
+	private Long departure;
 
 	/* Lombok */
 	@Singular("track")
-	@OneToMany
+	@OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
 	private List<Action> tracking;
 
 	/* JPA */
@@ -72,5 +79,4 @@ public class Trip implements Serializable {
 	// Lombok
 	@Setter(AccessLevel.NONE)
 	private Status status;
-
 }
