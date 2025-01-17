@@ -17,6 +17,4 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
 	@Override
 	List<Trip> findAll();
 
-	// Buscar todos los viajes por nombre de usuario del cliente
-	List<Trip> findAllByClient(String clientUsername);
 }
