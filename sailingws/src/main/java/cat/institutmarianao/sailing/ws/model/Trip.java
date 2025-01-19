@@ -6,9 +6,11 @@ import java.util.List;
 import org.hibernate.annotations.Formula;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -30,9 +32,11 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "trips")
+@JsonPropertyOrder({ "id", "client", "places", "departure", "status", "tracking" })
+@JsonIgnoreProperties({ "serialVersionUID" })
 public class Trip implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -61,9 +65,10 @@ public class Trip implements Serializable {
 
 	private int places;
 
-	@Column(name = "departure_id", length = 20)
+	// @Column(name = "departure_id", length = 20)
+	@ManyToOne
 	@JoinColumn(name = "departure_id", nullable = false, referencedColumnName = "id")
-	private Long departure;
+	private Departure departure;
 
 	/* Lombok */
 	@Singular("track")

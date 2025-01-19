@@ -53,6 +53,7 @@ public class TripTypeController {
 	/**/
 	@GetMapping("/get/by/id/{id}")
 	public TripType findById(@PathVariable("id") @NotNull Long id) {
-		return tripTypeService.findById(id);
+
+		return tripTypeService.getById(id);
 	}
 }

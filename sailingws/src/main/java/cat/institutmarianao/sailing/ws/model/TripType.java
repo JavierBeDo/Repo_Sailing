@@ -7,8 +7,11 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -39,11 +42,12 @@ public class TripType implements Serializable {
 
 	/* Lombok */
 	@EqualsAndHashCode.Include
-
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Enumerated(EnumType.STRING)
+	@NotNull
 	private Category category;
 
 	@Column(name = "departures", length = 255)
@@ -51,6 +55,7 @@ public class TripType implements Serializable {
 
 	private String description;
 
+	// aqui en teoria va un json format
 	private int duration;
 
 	@Positive
@@ -59,5 +64,6 @@ public class TripType implements Serializable {
 	@Positive
 	private double price;
 
+	@NotNull
 	private String title;
 }

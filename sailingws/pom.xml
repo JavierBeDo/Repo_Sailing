@@ -95,11 +95,6 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>M6</groupId>
-			<artifactId>Example_Hibernate</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

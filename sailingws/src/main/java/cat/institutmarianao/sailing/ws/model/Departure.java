@@ -5,14 +5,17 @@ import java.util.Date;
 
 import org.hibernate.annotations.Formula;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -38,18 +41,23 @@ public class Departure implements Serializable {
 	@EqualsAndHashCode.Include
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 
 	@ManyToOne
 	@JoinColumn(name = "trip_type_id", nullable = false, referencedColumnName = "id")
 	private TripType tripType;
 
+	@NotNull
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	@Column(name = "date", columnDefinition = "DATE")
-	@Temporal(TemporalType.DATE)
+	// @Temporal(TemporalType.DATE)
 	protected Date date;
 
+	@NotNull
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
 	@Column(name = "departure", columnDefinition = "TIME")
-	@Temporal(TemporalType.TIME)
+	// @Temporal(TemporalType.TIME)
 	protected Date departure;
 
 	/* Hibernate */
